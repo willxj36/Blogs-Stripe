@@ -26,7 +26,7 @@ const AuthorPage: React.FC<RouteComponentProps> = ({ history }) => {
             setTags(tags);
 
             let allBlogs: Blog[] = await apiService(blogUrl);
-            if(User.role === 'admin') {
+            if(User.role === 'admin' || User.role === 'webmaster') {
                 setBlogs(allBlogs);
             } else {
                 let blogs: Blog[] = allBlogs.filter(blog => { //makes it so that if user is an 'author', only the blogs they posted show up to be edited. For some reason, if I try to access a page an 'author' doesn't have permission for, this part of the page no longer works at all until I log out and back in. Not sure why.
@@ -61,14 +61,14 @@ const AuthorPage: React.FC<RouteComponentProps> = ({ history }) => {
         location.reload();
     }
 
-    if(User.role === 'admin' || User.role === 'author') {
+    if(User.role === 'admin' || User.role === 'author' || User.role === 'webmaster') {
         return ( //may try to make it so that User also carries actual author name at some point, for now userid will work as a stand-in
             <>
                 <div className="col container shadow border">
                     <div className="row">
                         <h5 className="form-label ml-3 mt-4">Logged in as: {User.userid}</h5> 
                         <button onClick={logout} className="btn btn-warning align-self-center mt-3 ml-auto mr-3">Logout</button>
-                        { User.role === 'admin' ? <Link to="/adminpage" className="btn btn-warning align-self-center mt-3 mr-3">Users Admin Options</Link> : null }
+                        { User.role === 'admin' || User.role === 'webmaster' ? <Link to="/adminpage" className="btn btn-warning align-self-center mt-3 mr-3">Users Admin Options</Link> : null }
                     </div>
                     <h5 className="form-label mt-4">Title</h5>
                     <input onChange={(e) => handleTitle(e.currentTarget.value)} type="text" name="title" id="title" className="form-control"/>

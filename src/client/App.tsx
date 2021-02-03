@@ -7,9 +7,14 @@ import EditBlog from './components/EditBlog';
 import Login from './components/Login';
 import AdminPage from './components/AdminPage';
 import Register from './components/Register';
+import Donation from './components/Donation';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js"
 
 const App = () => {
+
+	const stripePromise = loadStripe('pk_test_51IGYi7HP7kyqMiMLH0fbfhYnS7T1S6JPEUkIAzW6wgLHyTiUS5lbgSqnK0LQbFjlua2YWHQz9oX8IYTAVtlAaSuo006RvLC0zZ');
 
 	return (
 		<BrowserRouter>
@@ -22,6 +27,9 @@ const App = () => {
 				<Route path='/login' component={Login} />
 				<Route path='/adminpage' component={AdminPage} />
 				<Route path='/register' component={Register} />
+				<Route path='/donate'>
+					<Elements stripe={stripePromise}><Donation /></Elements>
+				</Route>
 			</Switch>
 		</BrowserRouter>
 	);

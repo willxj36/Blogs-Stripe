@@ -46,7 +46,7 @@ const EditBlog: React.FC<RouteComponentProps> = ({ history }) => {
     }, [id]);
 
     useEffect(() => {
-        if(User.userid !== blog.authorid && User.role !== 'admin') { //after loading blog, makes sure that an 'author' role can only edit blogs that they posted. Admin can edit any
+        if(User.userid !== blog.authorid && (User.role !== 'admin' && User.role !== 'webmaster')) { //after loading blog, makes sure that an 'author' role can only edit blogs that they posted. Admin can edit any
             alert('You can only edit your own blogs!');
             history.push('/authorpage');
         }

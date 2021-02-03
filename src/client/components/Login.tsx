@@ -29,7 +29,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
             if(result) {
                 SetAccessToken(result.token, {userid: result.userid, role: result.role});
                 saving = false;
-                if(User.role === 'admin' || User.role === 'author') {
+                if(User.role === 'admin' || User.role === 'author' || User.role === 'webmaster') {
                     history.push('/authorpage');
                 } else {
                     alert('Welcome guest! To add or edit blogs, you must be a registered author. But feel free to peruse the blogs!');

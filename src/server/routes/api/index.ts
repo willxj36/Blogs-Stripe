@@ -4,6 +4,7 @@ import blogRouter from './blogs';
 import authorRouter from './authors';
 import tagRouter from './tags';
 import blogTagRouter from './blogtags';
+import donateRouter from './donate';
 
 const router = express.Router();
 
@@ -18,5 +19,6 @@ router.use('/blogs', blogRouter);
 router.use('/authors', authorRouter);
 router.use('/tags', tagRouter);
 router.use('/blogtags', blogTagRouter);
+router.use('/donate', donateRouter);
 
 export default router;
